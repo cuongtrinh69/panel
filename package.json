@@ -1,0 +1,13 @@
+{
+  "name": "nodepanel",
+  "version": "1.0.0",
+  "description": "Simple NodeJS Manager Panel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.0.0"
+  }
+}
