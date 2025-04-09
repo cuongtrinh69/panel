@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NodeJS Manager Panel</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { margin: 5px; padding: 10px; }
+    #output { margin-top: 20px; white-space: pre-wrap; background: #f0f0f0; padding: 10px; border: 1px solid #ccc; height: 300px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>NodeJS Manager</h1>
+  <input id="command" placeholder="node your_file.js" style="width: 70%;">
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <div id="output"></div>
+
+  <script>
+    const socket = io();
+
+    function start() {
+      const command = document.getElementById('command').value;
+      socket.emit('start', { command });
+    }
+
+    function stop() {
+      socket.emit('stop');
+    }
+
+    socket.on('output', (data) => {
+      const output = document.getElementById('output');
+      output.textContent += data + '\n';
+      output.scrollTop = output.scrollHeight;
+    });
+  </script>
+</body>
+</html>
